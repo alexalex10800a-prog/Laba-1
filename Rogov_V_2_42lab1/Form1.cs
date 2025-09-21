@@ -20,6 +20,7 @@ namespace Rogov_V_2_42lab1
         {
             InitializeComponent();
             getTableNames();
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
         }
 
         private void getTableNames()
@@ -57,17 +58,9 @@ namespace Rogov_V_2_42lab1
                 using (MySqlDataAdapter adapter = new MySqlDataAdapter($"SELECT * FROM {tableName}", conn))
                 {
 
-                    if (ds.Tables.Contains(tableName))
-                    {
-                        ds.Tables[tableName].Clear();
-                    }
-                    else
-                    {
-                        adapter.Fill(ds, tableName);
-                    }
-                       
-
-                    dataGridView1.DataSource = ds.Tables[tableName];
+                    DataTable table1 = new DataTable();
+                    adapter.Fill(table1);
+                    dataGridView1.DataSource = table1;
                 }
             }
             catch (Exception ex)
@@ -76,23 +69,18 @@ namespace Rogov_V_2_42lab1
             }
 
         }
-        private void comboBoxTables_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox1.SelectedItem != null)
             {
                 LoadTableContent(comboBox1.SelectedItem.ToString());
             }
         }
+  
         private void tabPage1_Click(object sender, EventArgs e)
         {
 
         }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
