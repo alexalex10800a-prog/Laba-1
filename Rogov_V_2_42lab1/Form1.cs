@@ -16,7 +16,6 @@ namespace Rogov_V_2_42lab1
     {
         private DataTable empTable, partTable;
         private MySqlDataAdapter empAdapter, partAdapter;
-        private MySqlCommandBuilder empBuilder, partBuilder;
 
         private string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["myDatabaseConnection"].ConnectionString;
         public Form1()
@@ -33,8 +32,8 @@ namespace Rogov_V_2_42lab1
             {
                 using (MySqlConnection conn = new MySqlConnection(connectionString))
                 {
+                    
                     empAdapter = new MySqlDataAdapter("SELECT * FROM employee", conn);
-                    empBuilder = new MySqlCommandBuilder(empAdapter);
                     empTable = new DataTable();
                     empAdapter.Fill(empTable);
                     dataGridView1.DataSource = empTable;
@@ -56,7 +55,6 @@ namespace Rogov_V_2_42lab1
                 using (MySqlConnection conn2 = new MySqlConnection(connectionString))
                 {
                     partAdapter = new MySqlDataAdapter("SELECT * FROM participation", conn2);
-                    partBuilder = new MySqlCommandBuilder(partAdapter);
                     partTable = new DataTable();
                     partAdapter.Fill(partTable);
                     dataGridView2.DataSource = partTable;
@@ -74,6 +72,64 @@ namespace Rogov_V_2_42lab1
         {
 
         }
+
+        
+
+        private void btnAddEmp_Click(object sender, EventArgs e)
+        {
+            DataRow newRow = empTable.NewRow();
+            empTable.Rows.Add(newRow);
+        }
+        private void btnUpdateEmp_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    dataGridView1.EndEdit();
+                    empAdapter = new MySqlDataAdapter("SELECT * FROM employee", connection);
+                    MySqlCommandBuilder CommandBuilder = new MySqlCommandBuilder(empAdapter);
+                    int rowsAffected = empAdapter.Update(empTable);
+                    MessageBox.Show($"Обновлено {rowsAffected} сотрудников.");
+                    LoadEmployeeTable();
+                }
+                
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Ошибка! " + ex.Message );
+            }
+        }
+
+        private void btnAddPart_Click(object sender, EventArgs e)
+        {
+            DataRow newRow = partTable.NewRow();
+            partTable.Rows.Add(newRow);
+
+        }
+
+        private void btnUpdatePart_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    dataGridView2.EndEdit();
+                    partAdapter = new MySqlDataAdapter("SELECT * FROM participation", connection);
+                    MySqlCommandBuilder commandBuilder = new MySqlCommandBuilder(partAdapter);
+                    int rowsAffected = partAdapter.Update(partTable);
+                    MessageBox.Show($"Обновлено {rowsAffected} строк состояния участия.");
+                    LoadParticipationTable();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка! " + ex.Message);
+            }
+        }
+
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -82,11 +138,6 @@ namespace Rogov_V_2_42lab1
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
-        }
-
-        private void btnAddEmp_Click(object sender, EventArgs e)
-        {
-          
         }
     }
 }

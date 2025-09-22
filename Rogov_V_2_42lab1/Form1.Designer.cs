@@ -31,14 +31,16 @@
             this.query2 = new System.Windows.Forms.TabPage();
             this.query1 = new System.Windows.Forms.TabPage();
             this.tab1 = new System.Windows.Forms.TabPage();
+            this.btnUpdateEmp = new System.Windows.Forms.Button();
             this.btnAddEmp = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabСontrol1 = new System.Windows.Forms.TabControl();
             this.tab2 = new System.Windows.Forms.TabPage();
+            this.btnUpdatePart = new System.Windows.Forms.Button();
             this.btnAddPart = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.txtEmployeeID = new System.Windows.Forms.TextBox();
-            this.txtFullName = new System.Windows.Forms.TextBox();
+            this.btnDeletePart = new System.Windows.Forms.Button();
+            this.btnDeleteEmp = new System.Windows.Forms.Button();
             this.tab1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabСontrol1.SuspendLayout();
@@ -70,8 +72,8 @@
             // 
             // tab1
             // 
-            this.tab1.Controls.Add(this.txtFullName);
-            this.tab1.Controls.Add(this.txtEmployeeID);
+            this.tab1.Controls.Add(this.btnDeleteEmp);
+            this.tab1.Controls.Add(this.btnUpdateEmp);
             this.tab1.Controls.Add(this.btnAddEmp);
             this.tab1.Controls.Add(this.dataGridView1);
             this.tab1.Location = new System.Drawing.Point(4, 25);
@@ -84,12 +86,23 @@
             this.tab1.UseVisualStyleBackColor = true;
             this.tab1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
+            // btnUpdateEmp
+            // 
+            this.btnUpdateEmp.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnUpdateEmp.Location = new System.Drawing.Point(650, 86);
+            this.btnUpdateEmp.Name = "btnUpdateEmp";
+            this.btnUpdateEmp.Size = new System.Drawing.Size(280, 55);
+            this.btnUpdateEmp.TabIndex = 4;
+            this.btnUpdateEmp.Text = "Обновить";
+            this.btnUpdateEmp.UseVisualStyleBackColor = true;
+            this.btnUpdateEmp.Click += new System.EventHandler(this.btnUpdateEmp_Click);
+            // 
             // btnAddEmp
             // 
             this.btnAddEmp.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnAddEmp.Location = new System.Drawing.Point(650, 175);
+            this.btnAddEmp.Location = new System.Drawing.Point(650, 7);
             this.btnAddEmp.Name = "btnAddEmp";
-            this.btnAddEmp.Size = new System.Drawing.Size(292, 55);
+            this.btnAddEmp.Size = new System.Drawing.Size(280, 55);
             this.btnAddEmp.TabIndex = 3;
             this.btnAddEmp.Text = "Добавить";
             this.btnAddEmp.UseVisualStyleBackColor = true;
@@ -121,6 +134,8 @@
             // 
             // tab2
             // 
+            this.tab2.Controls.Add(this.btnDeletePart);
+            this.tab2.Controls.Add(this.btnUpdatePart);
             this.tab2.Controls.Add(this.btnAddPart);
             this.tab2.Controls.Add(this.dataGridView2);
             this.tab2.Location = new System.Drawing.Point(4, 25);
@@ -130,15 +145,27 @@
             this.tab2.Text = "tab2";
             this.tab2.UseVisualStyleBackColor = true;
             // 
+            // btnUpdatePart
+            // 
+            this.btnUpdatePart.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnUpdatePart.Location = new System.Drawing.Point(654, 75);
+            this.btnUpdatePart.Name = "btnUpdatePart";
+            this.btnUpdatePart.Size = new System.Drawing.Size(280, 55);
+            this.btnUpdatePart.TabIndex = 3;
+            this.btnUpdatePart.Text = "Обновить";
+            this.btnUpdatePart.UseVisualStyleBackColor = true;
+            this.btnUpdatePart.Click += new System.EventHandler(this.btnUpdatePart_Click);
+            // 
             // btnAddPart
             // 
             this.btnAddPart.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnAddPart.Location = new System.Drawing.Point(654, 4);
             this.btnAddPart.Name = "btnAddPart";
-            this.btnAddPart.Size = new System.Drawing.Size(292, 55);
+            this.btnAddPart.Size = new System.Drawing.Size(280, 55);
             this.btnAddPart.TabIndex = 2;
             this.btnAddPart.Text = "Добавить";
             this.btnAddPart.UseVisualStyleBackColor = true;
+            this.btnAddPart.Click += new System.EventHandler(this.btnAddPart_Click);
             // 
             // dataGridView2
             // 
@@ -151,19 +178,25 @@
             this.dataGridView2.TabIndex = 1;
             this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             // 
-            // txtEmployeeID
+            // btnDeletePart
             // 
-            this.txtEmployeeID.Location = new System.Drawing.Point(654, 19);
-            this.txtEmployeeID.Name = "txtEmployeeID";
-            this.txtEmployeeID.Size = new System.Drawing.Size(288, 22);
-            this.txtEmployeeID.TabIndex = 4;
+            this.btnDeletePart.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnDeletePart.Location = new System.Drawing.Point(654, 148);
+            this.btnDeletePart.Name = "btnDeletePart";
+            this.btnDeletePart.Size = new System.Drawing.Size(280, 55);
+            this.btnDeletePart.TabIndex = 4;
+            this.btnDeletePart.Text = "Удалить";
+            this.btnDeletePart.UseVisualStyleBackColor = true;
             // 
-            // txtFullName
+            // btnDeleteEmp
             // 
-            this.txtFullName.Location = new System.Drawing.Point(653, 47);
-            this.txtFullName.Name = "txtFullName";
-            this.txtFullName.Size = new System.Drawing.Size(288, 22);
-            this.txtFullName.TabIndex = 5;
+            this.btnDeleteEmp.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnDeleteEmp.Location = new System.Drawing.Point(650, 163);
+            this.btnDeleteEmp.Name = "btnDeleteEmp";
+            this.btnDeleteEmp.Size = new System.Drawing.Size(280, 55);
+            this.btnDeleteEmp.TabIndex = 5;
+            this.btnDeleteEmp.Text = "Удалить";
+            this.btnDeleteEmp.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -175,7 +208,6 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.tab1.ResumeLayout(false);
-            this.tab1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabСontrol1.ResumeLayout(false);
             this.tab2.ResumeLayout(false);
@@ -195,8 +227,10 @@
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Button btnAddEmp;
         private System.Windows.Forms.Button btnAddPart;
-        private System.Windows.Forms.TextBox txtEmployeeID;
-        private System.Windows.Forms.TextBox txtFullName;
+        private System.Windows.Forms.Button btnUpdatePart;
+        private System.Windows.Forms.Button btnUpdateEmp;
+        private System.Windows.Forms.Button btnDeleteEmp;
+        private System.Windows.Forms.Button btnDeletePart;
     }
 }
 
