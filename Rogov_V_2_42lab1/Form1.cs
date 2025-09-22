@@ -14,69 +14,62 @@ namespace Rogov_V_2_42lab1
 {
     public partial class Form1 : Form
     {
-        private DataSet ds = new DataSet();
+        private DataTable empTable, partTable;
+        private MySqlDataAdapter empAdapter, partAdapter;
+        private MySqlCommandBuilder empBuilder, partBuilder;
+
         private string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["myDatabaseConnection"].ConnectionString;
         public Form1()
         {
             InitializeComponent();
-            getTableNames();
-            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            LoadEmployeeTable();
+            LoadParticipationTable();
         }
 
-        private void getTableNames()
+        public void LoadEmployeeTable()
         {
 
-            try {
-
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
-                {
-                    connection.Open();
-                    DataTable tables = connection.GetSchema("Tables");
-                    comboBox1.Items.Clear();
-
-                    foreach (DataRow row in tables.Rows) 
-                        comboBox1.Items.Add(row["TABLE_NAME"].ToString());
-
-                    if (comboBox1.Items.Count > 0)
-                        comboBox1.SelectedIndex = 0;
-                }
-
-            }
-            catch (Exception ex) {
-
-                MessageBox.Show($"Error loading tables: {ex.Message}");
-
-            }
-
-
-        }
-        private void LoadTableContent(string tableName)
-        {
             try
             {
                 using (MySqlConnection conn = new MySqlConnection(connectionString))
-                using (MySqlDataAdapter adapter = new MySqlDataAdapter($"SELECT * FROM {tableName}", conn))
                 {
+                    empAdapter = new MySqlDataAdapter("SELECT * FROM employee", conn);
+                    empBuilder = new MySqlCommandBuilder(empAdapter);
+                    empTable = new DataTable();
+                    empAdapter.Fill(empTable);
+                    dataGridView1.DataSource = empTable;
+                    dataGridView1.AllowUserToAddRows = false;
 
-                    DataTable table1 = new DataTable();
-                    adapter.Fill(table1);
-                    dataGridView1.DataSource = table1;
+
+
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading {tableName}: {ex.Message}");
+                MessageBox.Show("Ошибка при загрузке таблицы: " + ex.Message);
             }
-
         }
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        public void LoadParticipationTable()
         {
-            if (comboBox1.SelectedItem != null)
+            try
             {
-                LoadTableContent(comboBox1.SelectedItem.ToString());
+                using (MySqlConnection conn2 = new MySqlConnection(connectionString))
+                {
+                    partAdapter = new MySqlDataAdapter("SELECT * FROM participation", conn2);
+                    partBuilder = new MySqlCommandBuilder(partAdapter);
+                    partTable = new DataTable();
+                    partAdapter.Fill(partTable);
+                    dataGridView2.DataSource = partTable;
+                    dataGridView2.AllowUserToAddRows = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при загрузке таблицы: " + ex.Message);
             }
         }
-  
+        
+
         private void tabPage1_Click(object sender, EventArgs e)
         {
 
@@ -84,6 +77,16 @@ namespace Rogov_V_2_42lab1
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void btnAddEmp_Click(object sender, EventArgs e)
+        {
+          
         }
     }
 }
