@@ -130,6 +130,54 @@ namespace Rogov_V_2_42lab1
             }
         }
 
+        private void btnDeleteEmp_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                {
+                    conn.Open();
+                    empAdapter = new MySqlDataAdapter("SELECT * FROM employee", conn);
+                    MySqlCommandBuilder commandBuilder = new MySqlCommandBuilder(empAdapter);
+                    int rowIndex = dataGridView1.CurrentRow.Index;
+
+                    empTable.Rows[rowIndex].Delete();
+
+                    int rowsAffected = empAdapter.Update(empTable);
+                    MessageBox.Show($"Удалено {rowsAffected} сотрудников");
+
+                    LoadEmployeeTable();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка! " + ex.Message );
+            }
+        }
+
+        private void btnDeletePart_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using(MySqlConnection conn = new MySqlConnection(connectionString))
+                {
+                    conn.Open();
+                    partAdapter = new MySqlDataAdapter("SELECT * FROM participation", conn);
+                    MySqlCommandBuilder commandBuilder = new MySqlCommandBuilder(partAdapter);
+                    int rowIndex = dataGridView2.CurrentRow.Index;
+                    partTable.Rows[rowIndex].Delete();
+                    int rowsAffected = partAdapter.Update(partTable);
+                    MessageBox.Show($"Удалено {rowsAffected} состояний участия");
+
+                    LoadParticipationTable();
+                }
+            }
+            catch(Exception ex) 
+            {
+                MessageBox.Show("Ошибка! " + ex.Message);
+            }
+        }
+
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 

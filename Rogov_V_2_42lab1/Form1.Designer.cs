@@ -187,6 +187,7 @@
             this.btnDeletePart.TabIndex = 4;
             this.btnDeletePart.Text = "Удалить";
             this.btnDeletePart.UseVisualStyleBackColor = true;
+            this.btnDeletePart.Click += new System.EventHandler(this.btnDeletePart_Click);
             // 
             // btnDeleteEmp
             // 
@@ -197,6 +198,7 @@
             this.btnDeleteEmp.TabIndex = 5;
             this.btnDeleteEmp.Text = "Удалить";
             this.btnDeleteEmp.UseVisualStyleBackColor = true;
+            this.btnDeleteEmp.Click += new System.EventHandler(this.btnDeleteEmp_Click);
             // 
             // Form1
             // 
