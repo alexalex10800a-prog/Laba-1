@@ -30,22 +30,31 @@
         {
             this.query2 = new System.Windows.Forms.TabPage();
             this.query1 = new System.Windows.Forms.TabPage();
+            this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.q1 = new System.Windows.Forms.Button();
+            this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.tab1 = new System.Windows.Forms.TabPage();
+            this.btnDeleteEmp = new System.Windows.Forms.Button();
             this.btnUpdateEmp = new System.Windows.Forms.Button();
             this.btnAddEmp = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabСontrol1 = new System.Windows.Forms.TabControl();
             this.tab2 = new System.Windows.Forms.TabPage();
+            this.btnDeletePart = new System.Windows.Forms.Button();
             this.btnUpdatePart = new System.Windows.Forms.Button();
             this.btnAddPart = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.btnDeletePart = new System.Windows.Forms.Button();
-            this.btnDeleteEmp = new System.Windows.Forms.Button();
+            this.dataGridView5 = new System.Windows.Forms.DataGridView();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.query1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             this.tab1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabСontrol1.SuspendLayout();
             this.tab2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
             this.SuspendLayout();
             // 
             // query2
@@ -61,6 +70,11 @@
             // 
             // query1
             // 
+            this.query1.Controls.Add(this.textBox1);
+            this.query1.Controls.Add(this.dataGridView5);
+            this.query1.Controls.Add(this.dataGridView4);
+            this.query1.Controls.Add(this.q1);
+            this.query1.Controls.Add(this.dataGridView3);
             this.query1.Location = new System.Drawing.Point(4, 25);
             this.query1.Margin = new System.Windows.Forms.Padding(4);
             this.query1.Name = "query1";
@@ -69,6 +83,36 @@
             this.query1.TabIndex = 2;
             this.query1.Text = "query1";
             this.query1.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView4
+            // 
+            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView4.Location = new System.Drawing.Point(568, 237);
+            this.dataGridView4.Name = "dataGridView4";
+            this.dataGridView4.RowHeadersWidth = 51;
+            this.dataGridView4.RowTemplate.Height = 24;
+            this.dataGridView4.Size = new System.Drawing.Size(342, 179);
+            this.dataGridView4.TabIndex = 2;
+            // 
+            // q1
+            // 
+            this.q1.Location = new System.Drawing.Point(657, 422);
+            this.q1.Name = "q1";
+            this.q1.Size = new System.Drawing.Size(166, 32);
+            this.q1.TabIndex = 1;
+            this.q1.Text = "Запрос";
+            this.q1.UseVisualStyleBackColor = true;
+            this.q1.Click += new System.EventHandler(this.q1_Click);
+            // 
+            // dataGridView3
+            // 
+            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView3.Location = new System.Drawing.Point(537, 16);
+            this.dataGridView3.Name = "dataGridView3";
+            this.dataGridView3.RowHeadersWidth = 51;
+            this.dataGridView3.RowTemplate.Height = 24;
+            this.dataGridView3.Size = new System.Drawing.Size(405, 187);
+            this.dataGridView3.TabIndex = 0;
             // 
             // tab1
             // 
@@ -85,6 +129,17 @@
             this.tab1.Text = "tab1";
             this.tab1.UseVisualStyleBackColor = true;
             this.tab1.Click += new System.EventHandler(this.tabPage1_Click);
+            // 
+            // btnDeleteEmp
+            // 
+            this.btnDeleteEmp.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnDeleteEmp.Location = new System.Drawing.Point(650, 163);
+            this.btnDeleteEmp.Name = "btnDeleteEmp";
+            this.btnDeleteEmp.Size = new System.Drawing.Size(280, 55);
+            this.btnDeleteEmp.TabIndex = 5;
+            this.btnDeleteEmp.Text = "Удалить";
+            this.btnDeleteEmp.UseVisualStyleBackColor = true;
+            this.btnDeleteEmp.Click += new System.EventHandler(this.btnDeleteEmp_Click);
             // 
             // btnUpdateEmp
             // 
@@ -145,6 +200,17 @@
             this.tab2.Text = "tab2";
             this.tab2.UseVisualStyleBackColor = true;
             // 
+            // btnDeletePart
+            // 
+            this.btnDeletePart.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnDeletePart.Location = new System.Drawing.Point(654, 148);
+            this.btnDeletePart.Name = "btnDeletePart";
+            this.btnDeletePart.Size = new System.Drawing.Size(280, 55);
+            this.btnDeletePart.TabIndex = 4;
+            this.btnDeletePart.Text = "Удалить";
+            this.btnDeletePart.UseVisualStyleBackColor = true;
+            this.btnDeletePart.Click += new System.EventHandler(this.btnDeletePart_Click);
+            // 
             // btnUpdatePart
             // 
             this.btnUpdatePart.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -178,27 +244,23 @@
             this.dataGridView2.TabIndex = 1;
             this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             // 
-            // btnDeletePart
+            // dataGridView5
             // 
-            this.btnDeletePart.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnDeletePart.Location = new System.Drawing.Point(654, 148);
-            this.btnDeletePart.Name = "btnDeletePart";
-            this.btnDeletePart.Size = new System.Drawing.Size(280, 55);
-            this.btnDeletePart.TabIndex = 4;
-            this.btnDeletePart.Text = "Удалить";
-            this.btnDeletePart.UseVisualStyleBackColor = true;
-            this.btnDeletePart.Click += new System.EventHandler(this.btnDeletePart_Click);
+            this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView5.Location = new System.Drawing.Point(23, 16);
+            this.dataGridView5.Name = "dataGridView5";
+            this.dataGridView5.RowHeadersWidth = 51;
+            this.dataGridView5.RowTemplate.Height = 24;
+            this.dataGridView5.Size = new System.Drawing.Size(508, 438);
+            this.dataGridView5.TabIndex = 3;
             // 
-            // btnDeleteEmp
+            // textBox1
             // 
-            this.btnDeleteEmp.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnDeleteEmp.Location = new System.Drawing.Point(650, 163);
-            this.btnDeleteEmp.Name = "btnDeleteEmp";
-            this.btnDeleteEmp.Size = new System.Drawing.Size(280, 55);
-            this.btnDeleteEmp.TabIndex = 5;
-            this.btnDeleteEmp.Text = "Удалить";
-            this.btnDeleteEmp.UseVisualStyleBackColor = true;
-            this.btnDeleteEmp.Click += new System.EventHandler(this.btnDeleteEmp_Click);
+            this.textBox1.Location = new System.Drawing.Point(568, 209);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(332, 22);
+            this.textBox1.TabIndex = 4;
+            this.textBox1.Text = "Общее число сотрудников по специальностям:";
             // 
             // Form1
             // 
@@ -209,11 +271,16 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.query1.ResumeLayout(false);
+            this.query1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             this.tab1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabСontrol1.ResumeLayout(false);
             this.tab2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -233,6 +300,11 @@
         private System.Windows.Forms.Button btnUpdateEmp;
         private System.Windows.Forms.Button btnDeleteEmp;
         private System.Windows.Forms.Button btnDeletePart;
+        private System.Windows.Forms.DataGridView dataGridView3;
+        private System.Windows.Forms.Button q1;
+        private System.Windows.Forms.DataGridView dataGridView4;
+        private System.Windows.Forms.DataGridView dataGridView5;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

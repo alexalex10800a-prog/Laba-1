@@ -14,8 +14,8 @@ namespace Rogov_V_2_42lab1
 {
     public partial class Form1 : Form
     {
-        private DataTable empTable, partTable;
-        private MySqlDataAdapter empAdapter, partAdapter;
+        private DataTable empTable, partTable, spTable;
+        private MySqlDataAdapter empAdapter, partAdapter, spAdapter;
 
         private string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["myDatabaseConnection"].ConnectionString;
         public Form1()
@@ -23,6 +23,7 @@ namespace Rogov_V_2_42lab1
             InitializeComponent();
             LoadEmployeeTable();
             LoadParticipationTable();
+            LoadSpecialtyTable();
         }
 
         public void LoadEmployeeTable()
@@ -38,8 +39,28 @@ namespace Rogov_V_2_42lab1
                     empAdapter.Fill(empTable);
                     dataGridView1.DataSource = empTable;
                     dataGridView1.AllowUserToAddRows = false;
+                    dataGridView5.DataSource = empTable;
+                    dataGridView5.AllowUserToAddRows = false;
 
 
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при загрузке таблицы: " + ex.Message);
+            }
+        }
+        public void LoadSpecialtyTable()
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                {
+                    spAdapter = new MySqlDataAdapter("SELECT * FROM specialty", conn);
+                    spTable = new DataTable();
+                    spAdapter.Fill(spTable);
+                    dataGridView3.DataSource = spTable;
+                    dataGridView3.AllowUserToAddRows = false;
 
                 }
             }
@@ -127,6 +148,38 @@ namespace Rogov_V_2_42lab1
             catch (Exception ex)
             {
                 MessageBox.Show("Ошибка! " + ex.Message);
+            }
+        }
+
+        private void q1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                {
+                    conn.Open();
+                    MySqlCommand command = new MySqlCommand("SELECT s.specialty_name, COUNT(e.employee_id) " +
+                                                            "AS \"Количество сотрудников\" FROM Specialty s LEFT JOIN Employee e ON e.specialty_code_FK1 = s.specialty_code " +
+                                                            "GROUP BY s.specialty_name;", conn);
+                    MySqlDataReader dataReader = command.ExecuteReader();
+                    DataTable dataTable1 = new DataTable("query1");
+                    dataTable1.Columns.Add("specialty_name");
+                    dataTable1.Columns.Add("Количество сотрудников");
+                    while (dataReader.Read())
+                    {
+                        DataRow row = dataTable1.NewRow();
+                        row["specialty_name"] = dataReader["specialty_name"];
+                        row["Количество сотрудников"] = dataReader["Количество сотрудников"];
+                        dataTable1.Rows.Add(row);
+                    }
+                    dataReader.Close();
+                    dataGridView4.DataSource = dataTable1;
+                }
+               
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка. " + ex.Message );
             }
         }
 
