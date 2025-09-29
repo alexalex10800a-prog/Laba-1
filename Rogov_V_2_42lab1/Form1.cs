@@ -1,21 +1,22 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Configuration;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+using System.Windows.Forms.VisualStyles;
 
 namespace Rogov_V_2_42lab1
 {
     public partial class Form1 : Form
     {
-        private DataTable empTable, partTable, spTable;
-        private MySqlDataAdapter empAdapter, partAdapter, spAdapter;
+        private DataTable empTable, partTable, spTable, projTable, contTable;
+        private MySqlDataAdapter empAdapter, partAdapter, spAdapter, projAdapter, contAdapter;
 
         private string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["myDatabaseConnection"].ConnectionString;
         public Form1()
@@ -24,6 +25,9 @@ namespace Rogov_V_2_42lab1
             LoadEmployeeTable();
             LoadParticipationTable();
             LoadSpecialtyTable();
+            LoadProjectTable();
+            LoadContractTable();
+            p1.Click += p1_Click;
         }
 
         public void LoadEmployeeTable()
@@ -87,8 +91,43 @@ namespace Rogov_V_2_42lab1
                 MessageBox.Show("Ошибка при загрузке таблицы: " + ex.Message);
             }
         }
-        
 
+        public void LoadProjectTable()
+        {
+            try
+            {
+                using (MySqlConnection conn2 = new MySqlConnection(connectionString))
+                {
+                    projAdapter = new MySqlDataAdapter("SELECT * FROM project", conn2);
+                    projTable = new DataTable();
+                    projAdapter.Fill(projTable);
+                    dataGridView6.DataSource = projTable;
+                    dataGridView6.AllowUserToAddRows = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при загрузке таблицы: " + ex.Message);
+            }
+        }
+        public void LoadContractTable()
+        {
+            try
+            {
+                using (MySqlConnection conn2 = new MySqlConnection(connectionString))
+                {
+                    contAdapter = new MySqlDataAdapter("SELECT * FROM contract", conn2);
+                    contTable = new DataTable();
+                    contAdapter.Fill(contTable);
+                    dataGridView7.DataSource = contTable;
+                    dataGridView7.AllowUserToAddRows = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при загрузке таблицы: " + ex.Message);
+            }
+        }
         private void tabPage1_Click(object sender, EventArgs e)
         {
 
@@ -230,7 +269,35 @@ namespace Rogov_V_2_42lab1
                 MessageBox.Show("Ошибка! " + ex.Message);
             }
         }
+        private void p1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                {
+                    conn.Open();
 
+                    using (MySqlCommand cmd = new MySqlCommand("get_projects_by_contract", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                 
+                        cmd.Parameters.AddWithValue("@p_contract_code", Convert.ToInt32(textBox2.Text));
+
+                        MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+                        adapter.Fill(dt);
+
+                        dataGridView8.DataSource = null;
+                        dataGridView8.DataSource = dt;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка: " + ex.Message);
+            }
+        }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
